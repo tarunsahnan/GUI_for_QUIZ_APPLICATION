@@ -1,0 +1,326 @@
+from tkinter import *
+import mysql.connector
+con=mysql.connector.connect(        #connecting to mysql
+        host ="localhost",
+        user="root",
+        passwd="tsahnan12",
+        database='quiz_users')
+
+mcrs=con.cursor()
+#mcrs.execute("create database quiz_users") 
+#mcrs.execute("create table quiz_data(username varchar(20),score int)")
+
+root=Tk()
+root.title("pythonquiz.com")
+root.geometry('1200x800')
+Label(root, text="************************************************************",font=("Helvetica", 24), fg="green").grid(row=0,column=0,columnspan=5,padx=(300,0))
+Label(root, text="WELCOME TO PYTHON QUIZ",font=("Helvetica", 30),fg="green").grid(row=1,column=0,columnspan=5,padx=(300,0))
+Label(root, text="************************************************************",font=("Helvetica", 24),fg="green").grid(row=2,column=0,columnspan=5,padx=(300,0))
+
+user=StringVar()
+Label(root,text="Enter your name").grid(row=3,column=0,padx=(450,0),pady=10)
+Entry(root,selectbackground="blue", textvariable=user).grid(row=3,column=1,padx=(0,10),pady=10)
+user_score=0
+
+times_option_opened=[0,0,0,0,0,0,0,0] #list to verify that options are shown only once
+
+#function to show options of first question
+def showoptions1():
+    global user_score
+    global times_option_opened
+    
+    if times_option_opened[0]==0:
+        option=Tk()
+        option.title("Choose the correct option")
+        option.geometry('450x250')
+        
+        #function to update scores if user presses correct options
+        def update_score(var):
+            global user_score
+            global times_option_opened
+            
+            times_option_opened[0] = times_option_opened[0] +1
+            if var==2:
+                user_score = user_score+1
+            option.destroy()
+    
+        Label(option,text= "ONCE YOU CLICK THE OPTION,\nYOU WILL NOT BE ABLE TO CHANGE YOUR OPTION AGAIN",fg="blue",font=("Helvetica", 10,'bold')).grid(row=3,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="type 'int'",activebackground="blue",command= lambda:update_score(1)).grid(row=5,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="type 'type'",activebackground="blue",command= lambda:update_score(2)).grid(row=7,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="Error",activebackground="blue",command= lambda:update_score(3)).grid(row=9,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="0",activebackground="blue",command= lambda:update_score(4)).grid(row=11,column=0,sticky='W',padx=(50,0),pady=10)
+        option.mainloop()
+
+#function to show options of second question
+def showoptions2():
+    global user_score
+    global times_option_opened
+    
+    if times_option_opened[1]==0:
+        option=Tk()
+        option.geometry('450x250')
+        option.title("Choose the correct option")
+    
+        #function to update scores if user presses correct options
+        def update_score(var):
+            global user_score
+            global times_option_opened
+            
+            times_option_opened[1] = times_option_opened[1] + 1
+            if var==1:
+                user_score = user_score+1
+            option.destroy()
+    
+        Label(option,text= "ONCE YOU CLICK THE OPTION,\nYOU WILL NOT BE ABLE TO CHANGE YOUR OPTION AGAIN",fg="blue",font=("Helvetica", 10,'bold')).grid(row=3,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text=" A ",activebackground="blue",command= lambda:update_score(1)).grid(row=5,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text=" B ",activebackground="blue",command= lambda:update_score(2)).grid(row=7,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text=" a ",activebackground="blue",command= lambda:update_score(3)).grid(row=9,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text=" b ",activebackground="blue",command= lambda:update_score(4)).grid(row=11,column=0,sticky='W',padx=(50,0),pady=10)
+        option.mainloop()
+
+    
+#function to show options of third question
+
+def showoptions3():
+    global user_score
+    global times_option_opened
+    
+    if times_option_opened[2]==0:
+        option=Tk()
+        option.geometry('450x250')
+        option.title("Choose the correct option")
+    
+        #function to update scores if user presses correct options
+        def update_score(var):
+            global user_score
+            global times_option_opened
+            
+            times_option_opened[2] = times_option_opened[2] + 1
+            if var==1:
+                user_score = user_score+1
+            option.destroy()
+    
+        Label(option,text= "ONCE YOU CLICK THE OPTION,\nYOU WILL NOT BE ABLE TO CHANGE YOUR OPTION AGAIN",fg="blue",font=("Helvetica", 10,'bold')).grid(row=3,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="Id returns the identity of the object",activebackground="blue",command= lambda:update_score(1)).grid(row=5,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="Every object doesn’t have a unique id ",activebackground="blue",command= lambda:update_score(2)).grid(row=7,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="All of the mentioned",activebackground="blue",command= lambda:update_score(3)).grid(row=9,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="none of the mentioned",activebackground="blue",command= lambda:update_score(4)).grid(row=11,column=0,sticky='W',padx=(50,0),pady=10)
+        option.mainloop()
+
+    
+#function to show options of fourth question
+def showoptions4():
+    global user_score
+    global times_option_opened
+        
+    if times_option_opened[3]==0:
+        option=Tk()
+        option.geometry('450x250')
+        option.title("Choose the correct option")
+    
+        #function to update scores if user presses correct options
+        def update_score(var):
+            global user_score
+            global times_option_opened
+            
+            times_option_opened[3] = times_option_opened[3] + 1
+            if var==3:
+                user_score = user_score+1
+            option.destroy()
+    
+        Label(option,text= "ONCE YOU CLICK THE OPTION,\nYOU WILL NOT BE ABLE TO CHANGE YOUR OPTION AGAIN",fg="blue",font=("Helvetica", 10,'bold')).grid(row=3,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="[3, 4, 5, 20, 5, 25, 1, 3]",activebackground="blue",command= lambda:update_score(1)).grid(row=5,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="[1, 3, 3, 4, 5, 5, 20, 25]",activebackground="blue",command= lambda:update_score(2)).grid(row=7,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="[3, 5, 20, 5, 25, 1, 3]",activebackground="blue",command= lambda:update_score(3)).grid(row=9,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="[1, 3, 4, 5, 20, 5, 25]",activebackground="blue",command= lambda:update_score(4)).grid(row=11,column=0,sticky='W',padx=(50,0),pady=10)
+        option.mainloop()
+
+
+#function to show options of fifth question
+def showoptions5():
+    global user_score
+    global times_option_opened
+    
+    if times_option_opened[4] ==0:
+        option=Tk()
+        option.geometry('450x250')
+        option.title("Choose the correct option")
+    
+        #function to update scores if user presses correct options
+        def update_score(var):
+            global user_score
+            global times_option_opened
+        
+            times_option_opened[4]= times_option_opened[4] + 1
+            if var==1:
+                user_score = user_score+1
+            option.destroy()
+    
+        Label(option,text= "ONCE YOU CLICK THE OPTION,\nYOU WILL NOT BE ABLE TO CHANGE YOUR OPTION AGAIN",fg="blue",font=("Helvetica", 10,'bold')).grid(row=3,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="4",activebackground="blue",command= lambda:update_score(1)).grid(row=5,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="5",activebackground="blue",command= lambda:update_score(2)).grid(row=7,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="4.5",activebackground="blue",command= lambda:update_score(3)).grid(row=9,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="4.0",activebackground="blue",command= lambda:update_score(4)).grid(row=11,column=0,sticky='W',padx=(50,0),pady=10)
+        option.mainloop()
+
+
+#function to show options of sixth question
+def showoptions6():
+    global user_score
+    global times_option_opened
+    
+    if times_option_opened[5] == 0:
+        option=Tk()
+        option.geometry('450x250')
+        option.title("Choose the correct option")
+    
+        #function to update scores if user presses correct options
+        def update_score(var):
+            global user_score
+            global times_option_opened
+            
+            times_option_opened[5] = times_option_opened[5] + 1
+            if var==3:
+                user_score = user_score+1
+            option.destroy()
+            
+        Label(option,text= "ONCE YOU CLICK THE OPTION,\nYOU WILL NOT BE ABLE TO CHANGE YOUR OPTION AGAIN",fg="blue",font=("Helvetica", 10,'bold')).grid(row=3,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="We cannot remove an element from set",activebackground="blue",command= lambda:update_score(1)).grid(row=5,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="Method is executed but no exception is raised.",activebackground="blue",command= lambda:update_score(2)).grid(row=7,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="Key error is raised.",activeforeground="red",activebackground="blue",command= lambda:update_score(3)).grid(row=9,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="There doesn’t exist such method as remove.",activebackground="blue",command= lambda:update_score(4)).grid(row=11,column=0,sticky='W',padx=(50,0),pady=10)
+        option.mainloop()
+
+
+#function to show options of seventh question
+def showoptions7():
+    global user_score
+    global times_option_opened
+    
+    if times_option_opened[6] == 0:
+        option=Tk()
+        option.geometry('500x250')
+        option.title("Choose the correct option")
+    
+        #function to update scores if user presses correct options
+        def update_score(var):
+            
+            global user_score
+            global times_option_opened
+            
+            times_option_opened[6] = times_option_opened[6] + 1
+            if var==2:
+                user_score = user_score+1
+            option.destroy()
+    
+        Label(option,text= "ONCE YOU CLICK THE OPTION,\nYOU WILL NOT BE ABLE TO CHANGE YOUR OPTION AGAIN",fg="blue",font=("Helvetica", 10,'bold')).grid(row=3,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="Tkinter.messagebox.showinfo(''showinfo'' , ''Is this a character? '')",activebackground="blue",command= lambda:update_score(1)).grid(row=5,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="Tkinter.messagebox.askyesno(''askyesno'' , ''Is this a character? '')",activebackground="blue",command= lambda:update_score(2)).grid(row=7,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="Tkinter.messagebox.showerror(''showerror'' , ''Is this a character? '')",activebackground="blue",command= lambda:update_score(3)).grid(row=9,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="Tkinter.messagebox.showwarning(''showwarning'' , ' 'Is this a character? '')",activebackground="blue",command= lambda:update_score(4)).grid(row=11,column=0,sticky='W',padx=(50,0),pady=10)
+        option.mainloop()
+
+
+#function to show options of eighth question
+def showoptions8():
+    global user_score
+    global times_option_opened
+    
+    if times_option_opened[7] == 0:
+        option=Tk()
+        option.geometry('450x250')
+        option.title("Choose the correct option")
+    
+        #function to update scores if user presses correct options
+        def update_score(var):
+            global user_score
+            global times_option_opened
+            
+            times_option_opened[7] = times_option_opened[7] + 1
+            if var==3:
+                user_score = user_score+1
+            option.destroy()
+    
+        Label(option,text= "ONCE YOU CLICK THE OPTION,\nYOU WILL NOT BE ABLE TO CHANGE YOUR OPTION AGAIN",fg="blue",font=("Helvetica", 10,'bold')).grid(row=3,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="Image = PhotoImage(imagefilename))",activebackground="blue",command= lambda:update_score(1)).grid(row=5,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="Canvas.create_image(filename)",activebackground="blue",command= lambda:update_score(2)).grid(row=7,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="Image = Photoimage(file=imagefilename)",activebackground="blue",command= lambda:update_score(3)).grid(row=9,column=0,sticky='W',padx=(50,0),pady=10)
+        Button(option,text="Image = Photoimage(imagefilename)",activebackground="blue",command= lambda:update_score(4)).grid(row=11,column=0,sticky='W',padx=(50,0),pady=10)     
+        option.mainloop()
+
+    
+#function to start the quix when user presses start quiz button
+def start_quiz():   
+    Label(root,text="1. What will be the output of the following code : print type(type(int))",fg='red').grid(row=32,column=0,padx=(400,0),columnspan=6, sticky='W')
+    b1=Button(root,text="Show options",activeforeground="blue",relief=GROOVE, activebackground="red",command=showoptions1)
+    b1.grid(row=32,column=7,pady=2,padx=(0,50))
+    
+    Label(root,text="2. What will be the output of the following code : chr(ord('A'))",fg='red').grid(row=34,column=0,columnspan=6,padx=(400,0), sticky='W')
+    b2=Button(root,text="Show options",activeforeground="blue",relief=GROOVE, activebackground="red",command=showoptions2)
+    b2.grid(row=34,column=7,pady=2,padx=(0,50))
+    
+    Label(root,text="3. Which of the following is the use of id() function in python?",fg='red').grid(row=36,column=0,columnspan=6,padx=(400,0), sticky='W')
+    b3=Button(root,text="Show options",activeforeground="blue",relief=GROOVE, activebackground="red",command=showoptions3)
+    b3.grid(row=36,column=7,pady=2,padx=(0,50))
+    
+    Label(root,text="4. Suppose list1 is [3, 4, 5, 20, 5, 25, 1, 3], what is list1 after list1.pop(1)?",fg='red').grid(row=38,columnspan=6,column=0,padx=(400,0), sticky='W')
+    b4=Button(root,text="Show options",activeforeground="blue",relief=GROOVE, activebackground="red",command=showoptions4)
+    b4.grid(row=38,column=7,pady=2,padx=(0,50))
+    
+    Label(root,text="5. What is the output of the following code : print 9//2",fg='red').grid(row=40,column=0,padx=(400,0),columnspan=6, sticky='W')
+    b5=Button(root,text="Show options",activeforeground="blue",relief=GROOVE, activebackground="red",command=showoptions5)
+    b5.grid(row=40,column=7,pady=2,padx=(0,50))
+    
+    Label(root,text="6. Suppose we have a set a = {10,9,8,7}, and we execute a.remove(14) what will happen ?",fg='red').grid(row=42,columnspan=6,padx=(400,0), sticky='W',column=0)
+    b6=Button(root,text="Show options",activeforeground="blue",relief=GROOVE, activebackground="red",command=showoptions6)
+    b6.grid(row=42,column=7,pady=2,padx=(0,50))
+    
+    Label(root,text="7. Which code can be used as an input dialog named ''Is this a character? ''",fg='red').grid(row=44,column=0,columnspan=6,padx=(400,0), sticky='W')
+    b7=Button(root,text="Show options",activeforeground="blue",relief=GROOVE, activebackground="red",command=showoptions7)
+    b7.grid(row=44,column=7,pady=2,padx=(0,50))
+    
+    Label(root,text="8. We can create an image in canvas. Select the option to do so?",fg='red').grid(row=46,column=0,columnspan=6,padx=(400,0), sticky='W')
+    b8=Button(root,text="Show options",activeforeground="blue",relief=GROOVE, activebackground="red",command=showoptions8)
+    b8.grid(row=46,column=7,pady=2,padx=(0,50))
+    
+    #function to show user score
+    def show_user_score():
+        global times_option_opened
+        
+        #this loop will  make sure that once show your score button is pressed, user cannot click on any option
+        for i in range(8):
+            times_option_opened[i]=1
+            
+        Label(root,text="Your Scores are: "+str(user_score),fg="blue").grid(row=51,column=1,pady=10)
+        Label(root,text="\n\nCorrect Answers for each questions are as follows: ",fg="blue").grid(row=52,columnspan=6,column=0,padx=(400,0), sticky='W',pady=10)
+        Label(root,text="1: (B)type 'type' ",fg="blue").grid(row=53,column=0,padx=(400,0),columnspan=6, sticky='W')
+        Label(root,text="2: (A)A ",fg="blue").grid(row=54,column=0,padx=(400,0), columnspan=6,sticky='W')
+        Label(root,text="3: (A)Id returns the identity of the object ",fg="blue").grid(row=55,columnspan=6,column=0,padx=(400,0), sticky='W')
+        Label(root,text="4: (C)[3, 5, 20, 5, 25, 1, 3] ",fg="blue").grid(row=56,column=0,padx=(400,0),columnspan=6, sticky='W')
+        Label(root,text="5: (A)4 ",fg="blue").grid(row=57,column=0,padx=(400,0),columnspan=6, sticky='W')
+        Label(root,text="6: (C)Key error is raised.",fg="blue").grid(row=58,column=0,padx=(400,0),columnspan=6, sticky='W')
+        Label(root,text="7: (B)Tkinter.messagebox.askyesno(''askyesno'' , ''Is this a character? '')",fg="blue").grid(row=59,columnspan=6,column=0,padx=(400,0), sticky='W')
+        Label(root,text="8: (C)Image = Photoimage(file=imagefilename) ",fg="blue").grid(row=60,column=0,padx=(400,0),columnspan=6, sticky='W')
+        
+        mcrs.execute("insert into quiz_data values(%s,%s)",(user.get(),user_score))
+        con.commit()
+        
+    Button(root,text="Show you scores",activeforeground="blue",relief=GROOVE, activebackground="red",command=show_user_score).grid(row=50,column=1,pady=20,padx=(0,100))
+    
+#function to show scores of all the 
+def showdata():
+    data=Tk()
+    data.geometry("400x800")
+    data.title("all data")
+    mcrs.execute("select * from quiz_data order by score desc")
+    result=mcrs.fetchall()
+    r=1
+    for i in result:
+        Label(data,text="User '"+i[0]+"' got "+str(i[1])+" marks.").grid(row=r,column=0,padx=(100,0), sticky='W')
+        r=r+1
+
+
+Button(root,text="Start Quiz",activeforeground="red",relief=GROOVE, activebackground="blue",command=start_quiz).grid(row=24,column=1,pady=5)
+Button(root,text="Show all scores",activeforeground="red",relief=GROOVE, activebackground="blue",command=showdata).grid(row=24,column=2,padx=(0,120),pady=5)
+
+root.mainloop()
